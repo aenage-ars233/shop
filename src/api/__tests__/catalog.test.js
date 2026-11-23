@@ -118,6 +118,23 @@ describe("API Client", () => {
     expect(result.e.type).toBe(ErrorType.INVALID_RESPONSE);
   });
 
+  it("throws INVALID_RESPONSE when successful response has invalid JSON", async () => {
+    fetch.mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () => Promise.reject(new SyntaxError("Unexpected end of JSON input")),
+    });
+
+    const promise = fetchProductsWithRetry();
+    const settled = promise.then((v) => ({ ok: true, v })).catch((e) => ({ ok: false, e }));
+    await vi.runAllTimersAsync();
+
+    const result = await settled;
+    expect(result.ok).toBe(false);
+    expect(result.e).toBeInstanceOf(ApiError);
+    expect(result.e.type).toBe(ErrorType.INVALID_RESPONSE);
+  });
+
   it("handles rate limit 429", async () => {
     const headers = new Headers();
     headers.set("Retry-After", "5");

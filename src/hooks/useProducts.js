@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { fetchProductsWithRetry, fetchProductsMock } from "../api/catalog.js";
 
-const useMockData = import.meta.env.VITE_USE_MOCK_DATA === "true";
+const useMockData =
+  import.meta.env.VITE_USE_MOCK_DATA === "true" ||
+  (import.meta.env.VITE_USE_MOCK_DATA !== "false" && import.meta.env.DEV);
 
 export function useProducts() {
   const [products, setProducts] = useState([]);

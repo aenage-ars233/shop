@@ -41,3 +41,14 @@
 **Контекст:** MCP хорошо для ad-hoc проверок в чате, но для CI нужен воспроизводимый прогон. Тот же фреймворк для обоих сценариев — меньше когнитивной нагрузки.
 **Варианты:** Cypress (тяжелее, свой DSL), WebdriverIO (больше boilerplate), Puppeteer (без тест-раннера).
 **Решение:** `@playwright/test` как фреймворк, `tests/e2e/` директория, `playwright.config.js` с одним проектом (chromium) и `webServer` для поднятия dev.
+
+## Ревью API-клиента
+
+### Замечание: Ошибки response.json() не оборачиваются в ApiError.
+
+- Файл: [/src/api/catalog.js]
+- Строка: [49]
+- Серьёзность: critical
+- Суть: обернуть чтение и разбор JSON в try/catch, выбрасывая ApiError("Invalid response...", ErrorType.INVALID_RESPONSE).
+- Решение: принять
+- Обоснование: при невалидном JSON вместо каталога будет белый экран

@@ -46,7 +46,12 @@ async function fetchProducts(params = {}) {
     throw new ApiError(`Client error: ${response.status}`, ErrorType.CLIENT, response.status);
   }
 
-  const data = await response.json();
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new ApiError("Invalid response: invalid JSON", ErrorType.INVALID_RESPONSE);
+  }
   const adapted = adaptProductList(data);
   saveToCache(CACHE_KEY, adapted);
   return adapted;
