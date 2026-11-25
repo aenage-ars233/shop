@@ -15,6 +15,8 @@
 - API-клиент с повторами и фолбэком.
 - E2E: Playwright 1.61 (`tests/e2e/`).
 - MCP (Playwright) для сквозных тестов из диалога с агентом.
+- Git-хуки: commit-msg (commitlint), pre-push (AI-ревью).
+- Версия проекта: `0.1.0` (зафиксирована, не инкрементится автоматически).
 
 ## Чего делать нельзя
 
@@ -27,6 +29,7 @@
 - Отключать правила ESLint вместо исправления кода.
 - Захардкоживать API-ключи в коде или в репозитории: только через `.env` с префиксом `VITE_`.
 - Давать автоматическое одобрение меняющим состояние инструментам Playwright MCP — только через подтверждение (см. «Настроенные подсистемы»).
+- Коммитить секреты: `.env` остаётся в `.gitignore`.
 
 ## Как работать с задачей
 
@@ -49,6 +52,7 @@
 ## Настроенные подсистемы
 
 - MCP (Playwright): инструменты на чтение (`browser_snapshot`, `browser_take_screenshot`, `browser_wait_for`) — автоматически; меняющие состояние (`browser_click`, `browser_type`, `browser_navigate`) — через подтверждение; `browser_evaluate`, `browser_run_code` — подтверждение обязательно. Полная политика — `docs/mcp-inventory.md`, риски — `docs/mcp-risk-log.md`.
+- Git: Conventional Commits (`feat`/`fix`/`refactor`/`docs`/`test`/`chore`), ветки `feat/<scope>`; перед пушем — локальное AI-ревью (`claude --print` или `opencode run`); PR-описание — Что сделано / Зачем / Как проверить / Риски.
 
 ## Структура проекта
 
@@ -63,8 +67,10 @@
 - `tests/e2e/` — сквозные тесты Playwright; `playwright.config.js`.
 - `eslint.config.js` — конфигурация линтера.
 - `.cursor/mcp.json` — конфигурация Playwright MCP.
+- `.husky/` — git-хуки commit-msg и pre-push.
 - `docs/specs/api-catalog/` — комплект спецификаций (contract, architecture, risk-register).
 - `docs/decisions.md` — журнал решений.
+- `docs/pr-description.md` — описание PR.
 - `docs/` — спецификации: `filter-spec.md`, `promo-spec.md`, `checkout-validation-spec.md`.
 - `.env` — `VITE_USE_MOCK_DATA`, `VITE_API_KEY` (в `.gitignore`).
 

@@ -24,7 +24,7 @@ async function fetchProducts(params = {}) {
     });
   } catch (error) {
     if (error.name === "TimeoutError" || error.name === "AbortError") {
-      throw new ApiError("Request timed out", ErrorType.TIMEOUT);
+      throw new ApiError(`Request timed out after ${TIMEOUT_MS}ms`, ErrorType.TIMEOUT);
     }
     throw new ApiError("Network error", ErrorType.NETWORK);
   }
@@ -50,8 +50,9 @@ async function fetchProducts(params = {}) {
   try {
     data = await response.json();
   } catch {
-    throw new ApiError("Invalid response: invalid JSON", ErrorType.INVALID_RESPONSE);
+    throw new ApiError("Invalid JSON in response", ErrorType.INVALID_RESPONSE);
   }
+
   const adapted = adaptProductList(data);
   saveToCache(CACHE_KEY, adapted);
   return adapted;
