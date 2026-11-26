@@ -56,11 +56,15 @@
 - Git: Conventional Commits (`feat`/`fix`/`refactor`/`docs`/`test`/`chore`), ветки `feat/<scope>`; перед пушем — локальное AI-ревью (`claude --print` или `opencode run`); PR-описание — Что сделано / Зачем / Как проверить / Риски.
 - Релиз `0.1.0`: `CHANGELOG.md` (Keep a Changelog), `docs/risk-checklist.md`, `docs/release-notes.md`; релизный PR с дополнительной секцией «Артефакты релиза».
 
+## Режим: критическая зона
+
+Итоговая функция собирается полным циклом: комплект спецификаций (contract, architecture, risk-register) в `docs/specs/capstone/` до реализации, затем код, тесты, ревью, PR. Бонусом — запись в `CHANGELOG.md`, `release-notes.md`, расширенный `risk-checklist.md`, JSDoc на публичных интерфейсах.
+
 ## Структура проекта
 
 - `src/App.jsx`, `src/main.jsx` — точка входа.
 - `src/features/catalog/`, `src/features/cart/`, `src/features/checkout/`.
-- `src/api/` — HTTP-клиент, адаптер, ошибки, моки.
+- `src/api/` — HTTP-клиент, адаптер, ошибки, моки; `checkout.js` — оформление заказа.
 - `src/components/` — переиспользуемые UI-компоненты.
 - `src/data/` — встроенные данные (`products.js`, `promo.js`).
 - `src/utils/` — чистые утилиты без React (`price.js`, `filters.js`, `cart-utils.js`).
@@ -70,8 +74,9 @@
 - `eslint.config.js` — конфигурация линтера.
 - `.cursor/mcp.json` — конфигурация Playwright MCP.
 - `.husky/` — git-хуки commit-msg и pre-push.
-- `docs/specs/api-catalog/` — комплект спецификаций (contract, architecture, risk-register).
+- `docs/specs/api-catalog/`, `docs/specs/capstone/` — комплекты спецификаций.
 - `docs/decisions.md` — журнал решений.
+- `docs/capstone-review.md` — самооценка итоговой функции.
 - `docs/pr-description.md` — описание PR.
 - `docs/release-notes.md`, `docs/risk-checklist.md` — артефакты релиза.
 - `docs/` — спецификации: `filter-spec.md`, `promo-spec.md`, `checkout-validation-spec.md`.
@@ -96,6 +101,7 @@
 ## Соглашения по API
 
 - Базовый адрес `/api/v2` (константа `API_BASE` в `src/api/catalog.js`).
+- Каталог — `GET /api/v2/products`; оформление заказа — `POST /api/v2/orders` (`src/api/checkout.js`).
 - Таймаут `TIMEOUT_MS = 5000`, повторы `MAX_RETRIES = 3`.
 - Кеш в `localStorage`, ключ `CACHE_KEY = "products_cache"`.
 - Состояния интерфейса: `loading` / `retrying` / `fallback` / `failed`.

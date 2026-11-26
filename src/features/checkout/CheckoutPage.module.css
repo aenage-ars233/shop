@@ -1,13 +1,88 @@
 .page {
-  padding: 24px;
+  max-width: 900px;
 }
 
-.success,
-.empty {
-  padding: 48px 24px;
-  text-align: center;
+.title {
+  font-size: 24px;
+  margin-bottom: 24px;
 }
 
-.success h2 {
-  color: var(--color-success, #16a34a);
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Summary */
+
+.summary {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  position: sticky;
+  top: 24px;
+}
+
+.summaryTitle {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.summaryList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  gap: 12px;
+}
+
+.summaryTotals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+.summaryRowTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 700;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 4px;
+}
+
+.discount {
+  color: #2e7d32;
+}
+
+/* Success */
+
+.success {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.backLink {
+  display: inline-block;
+  color: #111;
+  font-weight: 500;
 }
