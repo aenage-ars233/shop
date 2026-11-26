@@ -1,6 +1,6 @@
 # HTML Academy Shop
 
-Учебный интернет-магазин курса «[Разработка с AI-агентами: инженерный подход](https://up.htmlacademy.ru/ai/2)». Каталог, корзина с промокодом, оформление заказа, интеграция с API поставщика, сквозные тесты через Playwright MCP.
+Учебный интернет-магазин курса «[Разработка с AI-агентами: инженерный подход](https://up.htmlacademy.ru/ai/2)». Релиз 0.1.0: каталог, корзина с промокодом, оформление заказа, интеграция с API поставщика, сквозные тесты через Playwright MCP, релизный пакет.
 
 ## Запуск
 
@@ -48,12 +48,16 @@ src/
 docs/
   specs/api-catalog/   # Комплект спецификаций для API (критическая зона)
   decisions.md         # Журнал решений
+  pr-description.md     # Описание PR: что, зачем, как проверить, риски
+  release-notes.md      # Заметки к релизу для пользователей
+  risk-checklist.md     # Чек-лист релизных рисков
   mcp-inventory.md     # Подключённые MCP-серверы и их инструменты
   mcp-risk-log.md      # Риски подключения MCP
 tests/e2e/             # Сквозные тесты Playwright
 .cursor/
   mcp.json             # Конфигурация Playwright MCP
   rules/               # Правила Cursor: project.mdc, components.mdc
+CHANGELOG.md           # История версий (формат Keep a Changelog)
 ```
 
 ## API-интеграция
@@ -73,6 +77,13 @@ npm run test:e2e
 ```
 
 Тесты выполняются на локальном сервере разработки. Запустить их может и агент через Playwright MCP.
+
+## Релиз
+
+- `CHANGELOG.md` — история версий в формате Keep a Changelog.
+- `docs/release-notes.md` — заметки к релизу для пользователей.
+- `docs/risk-checklist.md` — чек-лист релизных рисков.
+- `docs/pr-description.md` — описание релизного PR.
 
 ## Известные ограничения
 

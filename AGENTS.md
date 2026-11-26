@@ -16,6 +16,7 @@
 - E2E: Playwright 1.61 (`tests/e2e/`).
 - MCP (Playwright) для сквозных тестов из диалога с агентом.
 - Git-хуки: commit-msg (commitlint), pre-push (AI-ревью).
+- Релизный пакет: `CHANGELOG.md`, `docs/risk-checklist.md`, `docs/release-notes.md`.
 - Версия проекта: `0.1.0` (зафиксирована, не инкрементится автоматически).
 
 ## Чего делать нельзя
@@ -53,6 +54,7 @@
 
 - MCP (Playwright): инструменты на чтение (`browser_snapshot`, `browser_take_screenshot`, `browser_wait_for`) — автоматически; меняющие состояние (`browser_click`, `browser_type`, `browser_navigate`) — через подтверждение; `browser_evaluate`, `browser_run_code` — подтверждение обязательно. Полная политика — `docs/mcp-inventory.md`, риски — `docs/mcp-risk-log.md`.
 - Git: Conventional Commits (`feat`/`fix`/`refactor`/`docs`/`test`/`chore`), ветки `feat/<scope>`; перед пушем — локальное AI-ревью (`claude --print` или `opencode run`); PR-описание — Что сделано / Зачем / Как проверить / Риски.
+- Релиз `0.1.0`: `CHANGELOG.md` (Keep a Changelog), `docs/risk-checklist.md`, `docs/release-notes.md`; релизный PR с дополнительной секцией «Артефакты релиза».
 
 ## Структура проекта
 
@@ -71,7 +73,9 @@
 - `docs/specs/api-catalog/` — комплект спецификаций (contract, architecture, risk-register).
 - `docs/decisions.md` — журнал решений.
 - `docs/pr-description.md` — описание PR.
+- `docs/release-notes.md`, `docs/risk-checklist.md` — артефакты релиза.
 - `docs/` — спецификации: `filter-spec.md`, `promo-spec.md`, `checkout-validation-spec.md`.
+- `CHANGELOG.md` — история версий (Keep a Changelog).
 - `.env` — `VITE_USE_MOCK_DATA`, `VITE_API_KEY` (в `.gitignore`).
 
 ## Соглашения по коду
